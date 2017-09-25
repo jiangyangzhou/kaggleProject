@@ -52,5 +52,9 @@ def writer(filename, data, write_head=True, div=',', addition=False):
             fp.write(to_write)
 
 def change_type(data, line, to_type):
+    if(type(line) != list):
+        line = [line]
+        to_type = [to_type]
     for i in range(len(data)):
-        data[i][line]=to_type(data[i][line])
+        for j in range(len(line)):
+            data[i][line[j]]=to_type[j](data[i][line[j]])
