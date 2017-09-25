@@ -25,7 +25,7 @@ def reader(filename, has_head = False, skip_head = False, div=','):
                 for i in range(len(heads)):
                     if(i < len(items)):
                         to_add[heads[i]]=items[i]
-                    else
+                    else:
                         to_add[heads[i]]=""
                 ret.append(copy.deepcopy(to_add))
             else:
@@ -39,7 +39,7 @@ def writer(filename, data, write_head=True, div=',', addition=False):
     if(type(data[0]) == dict):
         w_type = True
         heads = [key for key in data[0].keys()]
-    with open(filename, op) as fp
+    with open(filename, op) as fp:
         for i in range(len(data)):
             d=data[i]
             to_write=""
