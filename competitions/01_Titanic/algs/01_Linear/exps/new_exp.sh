@@ -4,5 +4,5 @@ new_exp=exp`expr $last_exp + 1 | awk '{printf("%02d",$0)}'`
 topath=$selfpath/$new_exp
 mkdir $topath -p
 ln -s ../../data $topath/
-ln -s ../../code $topath/
-cp $selfpath/../config.json $topath/config.json
+mkdir $topath/code -p
+mkdir $topath/result -p 

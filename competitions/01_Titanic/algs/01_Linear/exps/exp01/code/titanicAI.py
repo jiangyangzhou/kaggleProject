@@ -1,3 +1,4 @@
+#coding=utf-8
 import pandas as pd
 from sklearn import datasets,linear_model
 from sklearn.linear_model import LinearRegression
@@ -44,10 +45,13 @@ def ageFit(testcsv,fil_train):
         if t["Age"]=="":
             t["Age"]=perAge
     return newtest
-
-traincsv=read_csv("train.csv")
-testcsv=read_csv("test.csv")
-ans=read_csv("gender_submission.csv")
+def Debug_log(x_test,y_test,y_predict):
+    for i in range(len(y_predict)):
+        if(y_test[i] != y_predict[i]):
+            print(x_test[i],y_test[i],y_predict[i])
+traincsv=read_csv("../data/train/train.csv")
+testcsv=read_csv("../data/test/test.csv")
+ans=read_csv("../data/test/gender_submission.csv")
 fil_train=filter(lambda x: x["Age"]!="" and x["Pclass"]!="" and x["Sex"]!=0,traincsv)
 print pd.DataFrame(traincsv)
 
@@ -63,7 +67,8 @@ regr = linear_model.LinearRegression()
 regr.fit(x_train,y_train)
 predict_y=map(lambda x:int(x+0.5),regr.predict(x_test))
 print predict_y
-print "成功率:"assess(predict_y,y_test)
+print "成功率:",assess(predict_y,y_test)
+Debug_log(x_test,y_test,predict_y) # 看看错误情况
 pd_x_train = pd.DataFrame(x_train)
 plt.scatter(pd_x_train[2], y_train,  color='black')
 plt.show()
